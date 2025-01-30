@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Item</title>
+    
+    <!-- CSS Links -->
+    <link th:href="@{/CSS/viewItem.css}" rel="stylesheet">
+    <link th:href="@{/CSS/headerFooter.css}" rel="stylesheet">
+
+    <!-- External Libraries -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css}" rel="stylesheet">
+
+    <!-- JavaScript Links -->
+    <script th:src="@{/JS/sidebar.js}"></script>
+    <script th:src="@{/JS/quanManipulation.js}"></script>
+     <script th:src="@{/JS/ImageSwap.js}" defer></script>
+</head>
+<body>
+<header th:insert="fragments/header :: header"></header>
+<div id="saleItem">
+    <div id="previewImages">
+       <img th:src="@{/Image/nendo2.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo2.jpg}">
+<img th:src="@{/Image/nendo1.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo1.jpg}">
+<img th:src="@{/Image/nendo3.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo3.jpg}">
+ 
+    </div>
+    <div id="imageEnlarge">
+        <img id="mainImage"  src="Image/nendo2.jpg"  alt="Main Image">
+    </div>
+    <div id="desc">
+        <div class="item-header">
+            <h2>Nikkari Aoe Nendoroid (Good Smile)</h2>
+            <p class="heart-container">
+                <img th:src="@{/Image/icon/heart.png}" width="25px" height="25px" alt="Heart Icon"> 4
+
+            </p>
+        </div>
+        <h3>USD  $66</h3>
+        <div class="quantity-control">
+            <label>Quantity: </label>
+            <button class="decrease">-</button>
+            <input type="number" value="0" name="quan" class="quantity-input" readonly>
+            <button class="increase">+</button>
+        </div>
+        
+        
+
+        <button id="addToCartBtn">Add to Cart</button>
+        <div id="popupNotification" class="hidden">
+            <p>Item has been added to the cart!</p>
+        </div>
+        <hr color="darkgrey">    
+            <h4>Product Description</h4>
+                <p>"Come now, smile." From the popular browser and smartphone game "Touken Ranbu -ONLINE-" comes a Nendoroid of Nikkari Aoe, a sword of the Aoe school just like Juzumaru Tsunetsugu. He comes with three face plates including a standard expression, a combat expression and a smiling expression based on the line "Come now, smile". His sword can be displayed both sheathed or drawn and he also comes with two differently shaped haori coats allowing you to display him in various different situations. Be sure to add him to your collection! Product Name Nendoroid Nikkari Aoe Series Touken Ranbu -ONLINE- Manufacturer ORANGE ROUGE</p>
+                <p id="last-updated">Last Updated:2024-12-10 23:24:59(1 month ago) </p> <!--We neeed to calculate the time here-->
+        <hr>      
+                <h4>Product information</h4>
+                <table class="info-table">
+                    <tr>
+                        <th>Category:</th>
+                        <td>Comics & Anime</td>
+                    </tr>
+                    <tr>
+                        <th>Condition:</th>
+                        <td>New</td>
+                    </tr>
+                    <tr>
+                        <th>Tags:</th>
+                        <td>touken ranbu, nikkari aoe, nendoroid, good smile</td>
+                    </tr>
+                </table>
+                
+                
+        <hr>
+            <div id="seller">
+                
+                <h4 style="margin-bottom: 0px;">Seller</h4>
+                <div class="profile-container">
+                    <img src="Image/profile/default.png" alt="Profile Picture" width="50px" height="50px">
+                    <a href="#"><h4>Seller Profile</h4></a>
+                </div>
+                <div class="profile-info">
+                    <div class="star-rating">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="identity-verified">
+                        <i class="fas fa-user-check"></i> Identity Verified
+                    </p>
+                </div>
+                
+                
+            </div>
+        </div>
+
+
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+ <script>
+        lucide.createIcons();
+      </script>
+
+</body>
+
+
+</html>
