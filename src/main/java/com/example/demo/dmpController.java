@@ -10,6 +10,11 @@ public class dmpController {
 		return "viewSale";
 		
 	}
+	@GetMapping("/viewProfile")
+	public String viewProfile() {
+		return "viewprofile";
+		
+	}
 	@GetMapping("/test")
 	public String test() {
 		return "test";

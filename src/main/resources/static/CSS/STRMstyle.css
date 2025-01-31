@@ -9,13 +9,12 @@
     --sidebar-bg: var(--background-color); /* Sidebar Background */
 }
 
-.body-shape {
+.add-body, .body-shape {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
 }
-
 
 /* Profile Section */
 .profile-container {
@@ -226,24 +225,19 @@ a:hover {
     color: var(--button-bg);
 }
 
-/* Page Wrapper with Reserved Space */
-.page-wrapper {
-    margin-top: 100px; /* Space for header */
-    margin-bottom: 50px; /* Space for footer */
-    background-color: var(--background-color);
-    border-radius: 10px;
-    padding: 0 20px;
-    
-}
 
-/* Page Container to Keep Content Centered */
+
+
 /* Page Wrapper with Reserved Space */
 .page-wrapper {
-    margin: 100px auto; /* Space for header */
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
     background-color: var(--background-color);
     border-radius: 10px;
-    padding: 0 20px;
-    max-width: 1000px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    
 }
 
 
@@ -265,8 +259,8 @@ a:hover {
 .address-book-container {
     flex-grow: 1;
     padding: 30px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin-left: 20px;
 }
@@ -295,7 +289,7 @@ a:hover {
     padding: 15px 20px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 /* Adjustments for Address Icon */
@@ -384,7 +378,7 @@ a:hover {
     margin-top: 30px;
     padding: 30px;
     padding-right: 70px;
-    background: white;
+    background-color:var(--background-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     max-width: 800px; /* Increased width */

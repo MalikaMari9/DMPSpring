@@ -3,74 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Address Book</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Address Form Example</title>
+    <link rel="stylesheet" href="CSS/STRMstyle.css">
+     <style>
+   body{
+   background-color:#f2f2f2;
+   }
+   </style>
 </head>
 <body>
-    <div class="page-wrapper">
-        
-                <div class="add-address-form">
-                    <h2>Addition Address Info</h2>
-                    <form id="addAddressForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" placeholder="Enter your name" required>
-                            </div>
-                           <div class="form-group">
-                                <label for="colony">Postal-Code</label>
-                                <input type="text" id="colony" >
-                            </div>
+<div class="add-body">
+    
+        <div class="page-wrapper">
+            <div class="add-address-form">
+                <h2>Addition Address Info</h2>
+                <form id="addAddressForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter your name" required>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phoneNumber">Phone Number</label>
-                                <input type="text" id="phoneNumber" placeholder="09-123456789" maxlength="12" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="region">Township</label>
-                                <select id="region">
-                                    <option value="Yangon">Yangon</option>
-                                    <option value="Mandalay">Mandalay</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="postalCode">Postal-Code</label>
+                            <input type="text" id="postalCode" placeholder="Enter your postal code">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="building">Building / House No / Floor / Street</label>
-                                <input type="text" id="building" >
-                            </div>
-                            <div class="form-group">
-                                <label for="region">City</label>
-                                <select id="region">
-                                    <option value="Yangon">Yangon</option>
-                                    <option value="Mandalay">Mandalay</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" id="phoneNumber" placeholder="09-123456789" maxlength="12" required>
                         </div>
-                        <div class="form-row">
-                           <div class="form-group">
-                                <label for="address">Address Detail</label>
-                                <textarea id="address" rows="5" cols="30"></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="deli_note">Deli Note</label>
-                                <textarea id="deli_note" rows="5" cols="30"></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label for="township">Township</label>
+                            <select id="township">
+                                <option value="Yangon">Yangon</option>
+                                <option value="Mandalay">Mandalay</option>
+                            </select>
                         </div>
-                        <div class="form-actions">
-                            <button type="button" class="cancel-button" onclick="clearForm(this)">Cancel</button>
-                            <button type="submit" class="save-button">Save</button>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="building">Building / House No / Floor / Street</label>
+                            <input type="text" id="building" placeholder="Enter details">
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <select id="city">
+                                <option value="Yangon">Yangon</option>
+                                <option value="Mandalay">Mandalay</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addressDetail">Address Detail</label>
+                            <textarea id="addressDetail" rows="4" placeholder="Provide address details"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryNote">Delivery Note</label>
+                            <textarea id="deliveryNote" rows="4" placeholder="Add delivery instructions"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-button" onclick="clearForm(this)">Cancel</button>
+                        <button type="submit" class="save-button">Save</button>
+                    </div>
+                </form>
             </div>
-    
- 
-    
-     <script src="assets/javascript/script.js"></script>
+        </div>
+   </div>
 </body>
+<script src="assets/javascript/script.js"></script>
 </html>

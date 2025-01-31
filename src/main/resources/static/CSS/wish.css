@@ -111,4 +111,24 @@
 
 .delete-button i:hover {
     color: #c82333; /* Darker red on hover */
+} 
+
+.wishlist-title {
+    font-size: 1.8rem;  /* Large title */
+    font-weight: bold;
+    color: #000; /* Black color */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between text and edit icon */
+}
+
+.wishlist-title i {
+    font-size: 1.2rem;
+    color: #555; /* Light gray for edit icon */
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.wishlist-title i:hover {
+    color: #000; /* Darken edit icon on hover */
 }
