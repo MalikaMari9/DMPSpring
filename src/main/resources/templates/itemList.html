@@ -1,70 +1,25 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="CSS/itemList.css">
     </head>
 <body>
 
     <div id="saleItemList">
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
-    <div id="saleItemContainer">
-        <a href="viewSale.html">
-           <div id="saleItem">
-            <img src="Image/nendo1.jpg" alt="item image">
-            <p id="status">Available</p>
-            <p id="price">$66</p>
-           </div> 
-           <p id="name">Nikkari Aoe Nendoroid</p>
-        </a>
-    </div>
+    
+<div id="saleItemContainer" th:each="item : ${itemList}">
+
+
+   
+        <div id="saleItem">
+            <img th:src="@{${item.getThumbnail()}}" width="100" height="100" alt="Thumbnail">
+            <p id="status" th:text="${item.stat}"></p>
+           <p id="price" th:text="'$' + ${item.price}"></p>
+
+        </div> 
+      <a th:href="@{/itemList/{itemID}(itemID=${item.itemID})}" th:text="${item.itemName}" id="name"></a> 
+  
+</div>
+
 
 </div>
 </body>

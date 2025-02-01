@@ -21,24 +21,33 @@
 <body>
 <header th:insert="fragments/header :: header"></header>
 <div id="saleItem">
-    <div id="previewImages">
-       <img th:src="@{/Image/nendo2.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo2.jpg}">
-<img th:src="@{/Image/nendo1.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo1.jpg}">
-<img th:src="@{/Image/nendo3.jpg}" class="thumbnail" alt="Thumbnail" height="75px" width="75px" th:attr="data-fullsize=@{/Image/nendo3.jpg}">
- 
-    </div>
-    <div id="imageEnlarge">
-        <img id="mainImage"  src="Image/nendo2.jpg"  alt="Main Image">
-    </div>
+   <div id="previewImages">
+    <!-- Loop through all images to create thumbnails -->
+    <img th:each="image : ${item.images}" 
+         th:src="@{/Image/Item/{itemID}/{fileName}(itemID=${item.itemID}, fileName=${image.imagePath})}" 
+         class="thumbnail" 
+         alt="Thumbnail" 
+         height="75px" 
+         width="75px" 
+         th:attr="data-fullsize=@{/Image/Item/{itemID}/{fileName}(itemID=${item.itemID}, fileName=${image.imagePath})}">
+</div>
+
+
+
+<div id="imageEnlarge">
+    <img id="mainImage" 
+         th:src="@{/Image/Item/{itemID}/{fileName}(itemID=${item.itemID}, fileName=${item.images[0]?.imagePath})}" 
+         alt="Main Image">
+</div>
     <div id="desc">
         <div class="item-header">
-            <h2>Nikkari Aoe Nendoroid (Good Smile)</h2>
+            <h2 th:text="${item.itemName}"></h2>
             <p class="heart-container">
                 <img th:src="@{/Image/icon/heart.png}" width="25px" height="25px" alt="Heart Icon"> 4
 
             </p>
         </div>
-        <h3>USD  $66</h3>
+        <h3 th:text="'USD'+ ${item.price}">USD  $66</h3>
         <div class="quantity-control">
             <label>Quantity: </label>
             <button class="decrease">-</button>
@@ -54,18 +63,22 @@
         </div>
         <hr color="darkgrey">    
             <h4>Product Description</h4>
-                <p>"Come now, smile." From the popular browser and smartphone game "Touken Ranbu -ONLINE-" comes a Nendoroid of Nikkari Aoe, a sword of the Aoe school just like Juzumaru Tsunetsugu. He comes with three face plates including a standard expression, a combat expression and a smiling expression based on the line "Come now, smile". His sword can be displayed both sheathed or drawn and he also comes with two differently shaped haori coats allowing you to display him in various different situations. Be sure to add him to your collection! Product Name Nendoroid Nikkari Aoe Series Touken Ranbu -ONLINE- Manufacturer ORANGE ROUGE</p>
-                <p id="last-updated">Last Updated:2024-12-10 23:24:59(1 month ago) </p> <!--We neeed to calculate the time here-->
-        <hr>      
+                <p th:text="${item.descrip}"></p>
+                <p id="last-updated">
+    Last Updated: 
+    <span th:text="${#temporals.format(item.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></span> 
+    (<span th:text="${item.getTimeAgo()}"></span>)
+</p>
+  <hr>      
                 <h4>Product information</h4>
                 <table class="info-table">
                     <tr>
                         <th>Category:</th>
-                        <td>Comics & Anime</td>
+                        <td th:text="${item.category.getFullCategoryPath()}"></td>
                     </tr>
                     <tr>
                         <th>Condition:</th>
-                        <td>New</td>
+                        <td  th:text="${item.cond}">New</td>
                     </tr>
                     <tr>
                         <th>Tags:</th>
@@ -80,7 +93,7 @@
                 <h4 style="margin-bottom: 0px;">Seller</h4>
                 <div class="profile-container">
                     <img src="Image/profile/default.png" alt="Profile Picture" width="50px" height="50px">
-                    <a href="#"><h4>Seller Profile</h4></a>
+                    <a href="#"><h4 th:text="${item.seller.username}"></h4></a>
                 </div>
                 <div class="profile-info">
                     <div class="star-rating">

@@ -260,18 +260,27 @@
             <div class="sidebar-sectionyoon">
               <h3 class="section-titleyoon">Account</h3>
               <div class="sidebar-buttonsyoon">
+              
+               <a th:href="@{/viewBuyer}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="user"></i>View Profile
                 </button>
+                </a>
+                <a th:href="@{/editProfile}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="edit"></i>Edit Profile
                 </button>
+                </a>
+                <a th:href="@{/changePassword}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="key"></i>Change Password
                 </button>
+                </a>
+                <a th:href="@{/addressBook}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="map-pin"></i>Address Book
                 </button>
+                </a>
               </div>
             </div>
     
@@ -279,15 +288,21 @@
             <div class="sidebar-sectionyoon">
               <h3 class="section-titleyoon">Shopping</h3>
               <div class="sidebar-buttonsyoon">
+              
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="shopping-cart"></i>Shopping Cart
                 </button>
+                
+                 <a th:href="@{/wishList}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="heart"></i>Wishlist
                 </button>
+                </a>
+                 <a th:href="@{/orderHistory}">
                 <button class="sidebar-buttonyoon">
                   <i data-lucide="history"></i>Order History
                 </button>
+                </a>
               </div>
             </div>
     

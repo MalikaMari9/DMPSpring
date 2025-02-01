@@ -9,11 +9,23 @@
     --sidebar-bg: var(--background-color); /* Sidebar Background */
 }
 
-.add-body, .body-shape {
-    margin: 0;
-    font-family: Arial, sans-serif;
+
+body{
+    margin-top: 100px;
+    margin-bottom: 100px;
     background-color: var(--background-color);
+}
+
+
+.add-body, .body-shape {
+
+
+    font-family: Arial, sans-serif;
+
     color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Profile Section */

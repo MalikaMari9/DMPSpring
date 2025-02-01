@@ -20,4 +20,47 @@ public class dmpController {
 		return "test";
 		
 	}
+	
+	//Site that has header footers
+	
+	@GetMapping("/addressBook")
+	public String addressBook() {
+		return "addressbook";
+		
+	}
+	
+	@GetMapping("/viewBuyer")
+	public String viewBuyer() {
+		return "buyer";
+		
+	}
+	
+	@GetMapping("/viewSeller")
+	public String viewSeller() {
+		return "viewprofile";
+		
+	}
+	
+	@GetMapping("/wishList")
+	public String wishList() {
+		return "wish";
+		
+	}
+	
+	@GetMapping("/editProfile")
+	public String editProfile() {
+		return "editprofile";
+	}
+	
+	@GetMapping("/changePassword")
+	public String changePassword() {
+		return "changepassword";
+	}
+	
+	@GetMapping("/orderHistory")
+	public String orderHistory() {
+		return "orderhistory";
+	}
+	
+	
 }
