@@ -16,11 +16,14 @@
     <!-- JavaScript Links -->
     <script th:src="@{/JS/sidebar.js}"></script>
     <script th:src="@{/JS/quanManipulation.js}"></script>
+    <script th:src="@{/JS/countdown.js}"></script>
      <script th:src="@{/JS/ImageSwap.js}" defer></script>
 </head>
 <body>
 <header th:insert="fragments/header :: header"></header>
+<!-- Normal Sale -->
 <div id="saleItem">
+ 
    <div id="previewImages">
     <!-- Loop through all images to create thumbnails -->
     <img th:each="image : ${item.images}" 
@@ -47,6 +50,8 @@
 
             </p>
         </div>
+        <div id="normal-sale"
+        th:if="${item.sellType != null and item.sellType.name() != 'AUCTION'}">
         <h3 th:text="'USD'+ ${item.price}">USD  $66</h3>
         <div class="quantity-control">
             <label>Quantity: </label>
@@ -60,6 +65,49 @@
         <button id="addToCartBtn">Add to Cart</button>
         <div id="popupNotification" class="hidden">
             <p>Item has been added to the cart!</p>
+        </div>
+        </div>
+       <div id="auction-sale"
+        th:if="${item.sellType != null and item.sellType.name() == 'AUCTION'}">
+        <div id="bid-details">
+            <table>
+                <tr>
+                    <th>Current Bid: </th><td th:text=${auction.startPrice}></td>
+                </tr>
+                
+                <tr>
+                    <th>Bids: </th><td>3</td>
+                </tr>
+                <tr>
+                   <th>Time Left: </th>
+						<td id="countdown" th:data-endtime="${#temporals.format(auction.endTime, 'yyyy-MM-dd HH:mm:ss')}">
+  						<span th:text="${auction.getRemainingTime()}"></span>
+						</td>
+                </tr>
+
+                <tr>
+                    <th>Your Max Bid</th><td><input type="number" name="userBid"></td>
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div id="bid-btn">
+        <button id="addToCartBtn"><img th:src="@{/Image/icon/bid.png}" width="25px" height="25px">Real Time Bid</button>
+        <div id="popupNotification" class="hidden">
+            <p>Item has been added to the cart!</p>
+        </div>
+        <button id="addToCartBtn"><img th:src="@{/Image/icon/target.png}" width="25px" height="25px">Place Sniper Bid</button>
+        <div class="tooltip-container">
+            <img th:src="@{/Image/icon/circle-help.png}" width="25px" height="25px" alt="Help Icon">
+            <span class="tooltip-text">If you choose the sniper bid option, your bid will be placed within the last 10 minutes of the auction.<br>
+                After placing a sniper bid, please be aware that there are several cases where you bid will not be made:<br>
+                1. Another bidder has placed a bid above your maximum bid<br>
+                2. The seller ends the auction early before our sniper bid is placed<br>
+                3. The seller does not wish to sell to proxy services and cancels our bid</span>
+        </div>
+        
+        </div>
         </div>
         <hr color="darkgrey">    
             <h4>Product Description</h4>
@@ -114,6 +162,10 @@
 
 
 </div>
+
+
+
+
 <footer th:insert="fragments/footer :: footer"></footer>
  <script>
         lucide.createIcons();

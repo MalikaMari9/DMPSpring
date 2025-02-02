@@ -28,6 +28,8 @@
                 <img src="Image/icon/heart.png" width="25px" height="25px" alt="Heart Icon"> 4
             </p>
         </div>
+        <div id="auction-sale"
+        th:if="${item.sellType != null and item.sellType.name() == 'AUCTION'}">
         <div id="bid-details">
             <table>
                 <tr>
@@ -63,6 +65,7 @@
                 3. The seller does not wish to sell to proxy services and cancels our bid</span>
         </div>
         
+        </div>
         </div>
         <hr color="darkgrey">    
             <h4>Product Description</h4>
@@ -112,7 +115,7 @@
         </div>
     </div>
 
-</div>
+
 
 <script src="JS/ImageSwap.js" defer></script>
 
