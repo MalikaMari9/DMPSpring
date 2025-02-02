@@ -72,11 +72,11 @@
         <div id="bid-details">
             <table>
                 <tr>
-                    <th>Current Bid: </th><td th:text=${auction.startPrice}></td>
+                    <th>Current Bid: </th><td th:text="'$ '+${maxBid}"></td>
                 </tr>
                 
                 <tr>
-                    <th>Bids: </th><td>3</td>
+                    <th>Bids: </th><td th:text=${auctionCount}></td>
                 </tr>
                 <tr>
                    <th>Time Left: </th>

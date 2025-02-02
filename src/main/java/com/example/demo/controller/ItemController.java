@@ -13,6 +13,7 @@ import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.Auction.AuctionRepository;
+import com.example.demo.repository.Auction.AuctionTrackRepository;
 
 import org.springframework.ui.Model;
 
@@ -29,7 +30,8 @@ public class ItemController {
 	
 	@Autowired
 	AuctionRepository auctionRepo;
-	
+	@Autowired
+	AuctionTrackRepository auctionTrackRepo;
 	
 	@GetMapping("/itemList")
 	public String viewItems(Model model) {
@@ -46,8 +48,16 @@ public class ItemController {
 	public String viewItem(@PathVariable("itemID") Integer itemID, Model model) {
 		Item item = itemRepo.getReferenceById(itemID);
 		Auction auction = auctionRepo.findByItem_ItemID(itemID);
+		
+		Long auctionID = (auction != null) ? auction.getAuctionID() : null;
+		int AuctionCount = auctionTrackRepo.countByAuction_AuctionID(auctionID);
+		Double maxBid = auctionTrackRepo.findMaxPriceByAuctionID(auctionID);
+		
 		model.addAttribute("item", item);
 		model.addAttribute("auction", auction);
+		
+		model.addAttribute("auctionCount",AuctionCount);
+		model.addAttribute("maxBid",maxBid);
 		return "viewSale";
 	}
 	

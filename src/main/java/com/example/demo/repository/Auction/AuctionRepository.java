@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Auction.Auction;
 
-public interface AuctionRepository extends JpaRepository<Auction, Integer>{
+public interface AuctionRepository extends JpaRepository<Auction, Long>{
 	
 	Auction findByItem_ItemID(int itemID);
 }
