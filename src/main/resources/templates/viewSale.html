@@ -72,7 +72,8 @@
         <div id="bid-details">
             <table>
                 <tr>
-                    <th>Current Bid: </th><td th:text="'$ '+${maxBid}"></td>
+                    <th>Current Bid: </th><td th:text="${maxBid != null ? '$ ' + maxBid : 'N/A'}"></td>
+
                 </tr>
                 
                 <tr>

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="CSS/sellItem.css">
-    <script src="JS/previewImage.js"></script>
-    <script src="JS/checkdeadline.js"></script>
+    <link rel="stylesheet" th:href="@{/CSS/sellItem.css}" />
+
+<script th:src="@{/JS/previewImage.js}"></script>
+    <script th:src="@{/JS/checkdeadline.js}"></script>
     <title>Auction Details</title>
 </head>
 <body>
-    <form id="item-form" action="" method="POST" enctype="multipart/form-data">
+    <form id="item-form" th:action="@{/auction-item}" method="POST" enctype="multipart/form-data">
         <h2 class="form-title">Auction Details</h2>
         <div class="form-grid">
             <div class="form-group">
@@ -34,26 +35,21 @@
           
             </div>
            
-            <div class="form-group">
-                <label for="item-category" class="form-label">Category:</label>
-                <select id="item-category" class="form-select" name="categories" required>
-                    <optgroup label="Electronics">
-                        <option value="mobiles">Mobiles</option>
-                        <option value="laptops">Laptops</option>
-                        <option value="cameras">Cameras</option>
-                    </optgroup>
-                    <optgroup label="Fashion">
-                        <option value="men">Men's Clothing</option>
-                        <option value="women">Women's Clothing</option>
-                        <option value="accessories">Accessories</option>
-                    </optgroup>
-                    <optgroup label="Home & Kitchen">
-                        <option value="furniture">Furniture</option>
-                        <option value="appliances">Appliances</option>
-                        <option value="decor">Home Decor</option>
-                    </optgroup>
-                </select>
-            </div>
+             <div class="form-group">
+			                <label for="item-category" class="form-label">Category:</label>
+			                <select id="item-category" class="form-select" name="categoryID" required >
+			                    <option value="" disabled selected>Select a Category</option>
+			                    <th:block th:each="entry : ${categoryMap}">
+			                        <optgroup th:label="${entry.key.name}">
+			                            <option th:each="sub : ${entry.value}"
+			                                    th:value="${sub.catID}"
+			                                    th:data-category="${entry.key.name}"
+			                                    th:text="${sub.name}">
+			                            </option>
+			                        </optgroup>
+			                    </th:block>
+			                </select>
+			            </div>
 
             <div class="form-group">
                 <label for="item-condition" class="form-label">Condition:</label>
@@ -72,7 +68,7 @@
 
             <div class="form-group">
                 <label for="item-images" class="form-label">Upload Images (Max 5):</label>
-                <input type="file" id="item-images" class="form-input" name="itemImages[]" accept="image/*" multiple required>
+                <input type="file" id="item-images" class="form-input" name="itemImages" accept="image/*" multiple required>
                 <button type="button" id="add-more-images" class="form-button" style="display:none;">Add More Images</button>
             </div>
         </div>

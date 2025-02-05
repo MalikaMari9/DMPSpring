@@ -108,4 +108,10 @@ public class Auction {
 
         return String.format("%d days %02d:%02d:%02d", days, hours, minutes, remainingSeconds);
     }
+    
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
 }

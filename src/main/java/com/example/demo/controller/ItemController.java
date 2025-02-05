@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -174,8 +175,105 @@ public class ItemController {
             saveItemTags(item, tags);
         }
 
-        return "redirect:/sell-item?success";
+        return "redirect:/itemList";
     }
+    
+    //Auctions
+    
+	@GetMapping("/auction-item")
+	public String showSellAuctionForm(Model model) {
+	    // Fetch all top-level categories (where parentCategory is NULL)
+	    List<Category> parentCategories = categoryRepo.findByParentCategoryIsNull();
+
+	    // Fetch all subcategories mapped by parent category
+	    Map<Category, List<Category>> categoryMap = parentCategories.stream()
+	            .collect(Collectors.toMap(
+	                    parent -> parent,
+	                    parent -> categoryRepo.findByParentCategory(parent)
+	            ));
+
+	    // Add to model
+	    model.addAttribute("categoryMap", categoryMap);
+	    return "sellItemAuction";
+	}
+	
+	@PostMapping("/auction-item")
+	public String saveAuction(
+	        @RequestParam("name") String name,
+	        @RequestParam("desc") String desc,
+	        @RequestParam("price") double price, // Start price
+	        @RequestParam("raising") double raising, // Minimum bid increment
+	        @RequestParam("deadline") String deadline, // Auction end date (String for conversion)
+	        @RequestParam("categoryID") Long categoryID,
+	        @RequestParam("cond") String cond,
+	        @RequestParam(value = "tags", required = false) String tags,
+	        @RequestParam(value = "itemImages", required = false) List<MultipartFile> images
+	) throws IOException {
+	    
+	    System.out.println("➡ Auction Item: " + name);
+	    System.out.println("➡ Start Price: " + price);
+	    System.out.println("➡ Raising Amount: " + raising);
+	    System.out.println("➡ Deadline: " + deadline);
+
+	    // ✅ Create & Save Item first
+	    Item item = new Item();
+	    item.setItemName(name);
+	    item.setDescrip(desc);
+	    item.setPrice(price);
+	    item.setQuality(1); // Auction items are always unique
+	    item.setSellType(Item.SellType.AUCTION);
+	    item.setCond(Item.Condition.valueOf(cond.toUpperCase()));
+	    item.setCreatedAt(LocalDateTime.now());
+	    item.setUpdatedAt(LocalDateTime.now());
+	    item.setStat(Item.Status.AVAILABLE);
+
+	    // ✅ Set category
+	    item.setCategory(categoryRepo.findById(categoryID)
+	            .orElseThrow(() -> new RuntimeException("❌ Category ID not found: " + categoryID)));
+
+	    // ✅ Assign seller (Currently static, replace with logged-in user later)
+	    User seller = userRepo.findById(1L)
+	            .orElseThrow(() -> new RuntimeException("❌ Seller ID not found"));
+	    item.setSeller(seller);
+
+	    // ✅ Save Item first
+	    item = itemRepo.save(item);
+	    System.out.println("✅ Item saved with ID: " + item.getItemID());
+
+	    // ✅ Convert deadline to LocalDateTime
+	    LocalDateTime auctionEndTime = LocalDate.parse(deadline).atStartOfDay().plusHours(23).plusMinutes(59);
+	    
+	    // ✅ Create & Save Auction
+	    Auction auction = new Auction();
+	    auction.setItem(item);
+	    auction.setStartPrice(price);
+	    auction.setIncrementAmount(raising);
+	    auction.setStat(Auction.AuctionStatus.ACTIVE);
+	    auction.setCreatedAt(LocalDateTime.now());
+	    auction.setEndTime(auctionEndTime);
+
+	    auction = auctionRepo.save(auction);
+	    System.out.println("✅ Auction saved with ID: " + auction.getAuctionID());
+
+	    // ✅ Save Images
+	    if (images != null && !images.isEmpty()) {
+	        System.out.println("➡ Images received: " + images.size());
+	        saveItemImages(item, images);
+	    } else {
+	        System.out.println("⚠️ No images uploaded for this auction.");
+	    }
+
+	    // ✅ Save Tags (if any)
+	    if (tags != null && !tags.isEmpty()) {
+	        saveItemTags(item, tags);
+	    }
+
+	    return "redirect:/itemList";
+	}
+
+    
+    
+    //methods
 
     private void saveItemImages(Item item, List<MultipartFile> images) throws IOException {
         Path itemPath = Paths.get(BASE_DIR + item.getItemID());
@@ -187,7 +285,7 @@ System.out.print("I am at save item img");
 
         for (MultipartFile file : images) {
             if (!file.isEmpty()) {
-                String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+                String fileName =  file.getOriginalFilename();
                 Path filePath = itemPath.resolve(fileName);
 
                 // ✅ Save file physically
