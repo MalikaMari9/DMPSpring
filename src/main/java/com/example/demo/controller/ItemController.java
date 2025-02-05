@@ -2,10 +2,17 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+
+import com.example.demo.entity.Category;
 
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Auction.Auction;
@@ -33,6 +40,25 @@ public class ItemController {
 	@Autowired
 	AuctionTrackRepository auctionTrackRepo;
 	
+
+	@GetMapping("/sell-item")
+	public String showSellItemForm(Model model) {
+	    // Fetch all top-level categories (where parentCategory is NULL)
+	    List<Category> parentCategories = categoryRepo.findByParentCategoryIsNull();
+
+	    // Fetch all subcategories mapped by parent category
+	    Map<Category, List<Category>> categoryMap = parentCategories.stream()
+	            .collect(Collectors.toMap(
+	                    parent -> parent,
+	                    parent -> categoryRepo.findByParentCategory(parent)
+	            ));
+
+	    // Add to model
+	    model.addAttribute("categoryMap", categoryMap);
+	    return "sellItemNormal";
+	}
+	
+
 	@GetMapping("/itemList")
 	public String viewItems(Model model) {
 		List<Item> itemList = itemRepo.findAll();

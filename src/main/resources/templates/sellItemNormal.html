@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="CSS/sellItem.css">
-    <script src="JS/previewImage.js"></script>
-    <script src="JS/clothing.js"></script>
+    <link rel="stylesheet" th:href="@{/CSS/sellItem.css}" />
+    <script th:src="@{/JS/previewImage.js}"></script>
+    <script th:src="@{/JS/clothing.js}"></script>
+
 </head>
 <body>
-    <form id="item-form" action="" method="POST" enctype="multipart/form-data">
+    <form id="item-form" action="@{/sell-item}" method="POST" enctype="multipart/form-data">
         <h2 class="form-title">Item Details</h2>
         <div class="form-grid">
             <div class="form-group">
@@ -37,27 +38,22 @@
 
 
 
+
             <div class="form-group">
                 <label for="item-category" class="form-label">Category:</label>
-                <select id="item-category" class="form-select" name="categories" required>
-                    <optgroup label="Electronics">
-                        <option value="mobiles">Mobiles</option>
-                        <option value="laptops">Laptops</option>
-                        <option value="cameras">Cameras</option>
-                    </optgroup>
-                    <optgroup label="Fashion">
-                        <option value="men">Men's Clothing</option>
-                        <option value="women">Women's Clothing</option>
-                        <option value="accessories">Accessories</option>
-                    </optgroup>
-                    <optgroup label="Home & Kitchen">
-                        <option value="furniture">Furniture</option>
-                        <option value="appliances">Appliances</option>
-                        <option value="decor">Home Decor</option>
-                    </optgroup>
+                <select id="item-category" class="form-select" name="categoryID" required onchange="toggleClothingDetails()">
+                    <option value="" disabled selected>Select a Category</option>
+                    <th:block th:each="entry : ${categoryMap}">
+                        <optgroup th:label="${entry.key.name}">
+                            <option th:each="sub : ${entry.value}"
+                                    th:value="${sub.catID}"
+                                    th:data-category="${entry.key.name}"
+                                    th:text="${sub.name}">
+                            </option>
+                        </optgroup>
+                    </th:block>
                 </select>
             </div>
-
 
 <!-- Clothing Details Modal -->
 <!-- Modal -->

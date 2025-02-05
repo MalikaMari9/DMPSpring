@@ -13,10 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let colorCount = 1; // Track the number of color fields
     const maxColors = 5;
 
-    // Show or hide the "Add More Clothing Details" button based on the selected category
+    // Show or hide additional clothing details based on category selection
     categorySelect.addEventListener("change", () => {
-        const selectedValue = categorySelect.value;
-        if (selectedValue === "men" || selectedValue === "women") {
+        const selectedOption = categorySelect.options[categorySelect.selectedIndex];
+        const selectedCategory = selectedOption.dataset.category; // Get parent category (e.g., "Clothing")
+
+        // Show details only if the parent category is "Clothing"
+        if (selectedCategory === "Clothing" || selectedCategory === "Shoes") {
             additionalDetailsContainer.style.display = "block";
         } else {
             additionalDetailsContainer.style.display = "none";
