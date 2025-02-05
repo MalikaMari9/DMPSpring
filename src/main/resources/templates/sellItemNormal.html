@@ -3,11 +3,11 @@
 <head>
     <link rel="stylesheet" th:href="@{/CSS/sellItem.css}" />
     <script th:src="@{/JS/previewImage.js}"></script>
-    <script th:src="@{/JS/clothing.js}"></script>
+   <script th:src="@{/JS/clothing.js}"></script> 
 
 </head>
 <body>
-    <form id="item-form" action="@{/sell-item}" method="POST" enctype="multipart/form-data">
+    <form id="item-form" th:action="@{/sell-item}" method="POST" enctype="multipart/form-data">
         <h2 class="form-title">Item Details</h2>
         <div class="form-grid">
             <div class="form-group">
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="item-category" class="form-label">Category:</label>
-                <select id="item-category" class="form-select" name="categoryID" required onchange="toggleClothingDetails()">
+                <select id="item-category" class="form-select" name="categoryID" >
                     <option value="" disabled selected>Select a Category</option>
                     <th:block th:each="entry : ${categoryMap}">
                         <optgroup th:label="${entry.key.name}">
@@ -66,8 +66,8 @@
             <div id="colors-container" class="form-group">
                 <label for="colors" class="form-label">Colors:</label>
                 <div id="color-fields">
-                    <input type="text" class="modal-input" name="colors[]" placeholder="Enter color" required>
-                    <input type="file" class="modal-input" name="colorImages[]" accept="image/*" required>
+                    <input type="text" class="modal-input" name="colors[]" placeholder="Enter color" >
+                    <input type="file" class="modal-input" name="colorImages[]" accept="image/*" >
                 </div>
                 <button type="button" id="add-color" class="modal-button">Add More Colors</button>
             </div>
@@ -76,7 +76,7 @@
             <div id="sizes-container" class="form-group">
                 <label for="sizes" class="form-label">Sizes:</label>
                 <div id="size-fields">
-                    <input type="text" class="modal-input" name="sizes[]" placeholder="Enter size (e.g., S, M, L)" required>
+                    <input type="text" class="modal-input" name="sizes[]" placeholder="Enter size (e.g., S, M, L)" >
                 </div>
                 <button type="button" id="add-size" class="modal-button">Add More Sizes</button>
             </div>
@@ -105,7 +105,7 @@
 
             <div class="form-group">
                 <label for="item-images" class="form-label">Upload Images (Max 5):</label>
-                <input type="file" id="item-images" class="form-input" name="itemImages[]" accept="image/*" multiple required>
+                <input type="file" id="item-images" class="form-input" name="itemImages" accept="image/*" multiple required>
                 <button type="button" id="add-more-images" class="form-button" style="display:none;">Add More Images</button>
             </div>
         </div>
