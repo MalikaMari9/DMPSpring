@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.ItemImage;
 
-public interface ItemImageRepository extends JpaRepository<ItemImage, Integer>{
+public interface ItemImageRepository extends JpaRepository<ItemImage, Long>{
 	
 	
 }

@@ -8,5 +8,5 @@ import com.example.demo.entity.Auction.Auction;
 
 public interface AuctionRepository extends JpaRepository<Auction, Long>{
 	
-	Auction findByItem_ItemID(int itemID);
+	Auction findByItem_ItemID(Long itemID);
 }

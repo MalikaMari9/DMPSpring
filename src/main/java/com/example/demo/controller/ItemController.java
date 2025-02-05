@@ -45,7 +45,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("itemList/{itemID}")
-	public String viewItem(@PathVariable("itemID") Integer itemID, Model model) {
+	public String viewItem(@PathVariable("itemID") Long itemID, Model model) {
 		Item item = itemRepo.getReferenceById(itemID);
 		Auction auction = auctionRepo.findByItem_ItemID(itemID);
 		
@@ -53,11 +53,19 @@ public class ItemController {
 		int AuctionCount = auctionTrackRepo.countByAuction_AuctionID(auctionID);
 		Double maxBid = auctionTrackRepo.findMaxPriceByAuctionID(auctionID);
 		
+		//tags
+
+		List<String> tagNames = itemRepo.findTagNamesByItemId(itemID);
+		String tagOutput = String.join(",", tagNames);
+
+		
 		model.addAttribute("item", item);
 		model.addAttribute("auction", auction);
 		
 		model.addAttribute("auctionCount",AuctionCount);
 		model.addAttribute("maxBid",maxBid);
+		
+		model.addAttribute("tagOutput", tagOutput);
 		return "viewSale";
 	}
 	

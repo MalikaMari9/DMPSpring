@@ -7,6 +7,9 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+
+import com.example.demo.entity.tag.ItemTag;
 
 @Entity
 @Table(name = "item_tbl")
@@ -54,7 +57,12 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemImage> images;
 
-    public List<ItemImage> getImages() {
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemTag> itemTags; // ✅ Relation with `itemtag_tbl`
+
+
+	public List<ItemImage> getImages() {
 		return images;
 	}
 
